@@ -1,7 +1,5 @@
 import { z } from "zod"
-import { primsa } from "../../lib/prisma"
 import { FastifyReply, FastifyRequest } from "fastify"
-import {hash} from 'bcryptjs'
 import { registerUseCase } from "../../use-cases/register"
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
@@ -11,6 +9,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
         email: z.string().email(),
         password: z.string().min(6),
     })
+    
     const { name, email, password } = registerBodySchema.parse(request.body)
 
     try{
@@ -21,7 +20,6 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     catch(err){
         return reply.status(400).send()
     }
-
    
     return reply.status(201).send()
 }
