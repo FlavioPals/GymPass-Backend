@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "GymPass style app.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
     "start": "node build/server.js"
+    
   },
   "keywords": [],
   "author": "",
@@ -19,7 +22,9 @@
     "prisma": "5.18.0",
     "tsup": "^8.2.4",
     "tsx": "^4.17.0",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vite-tsconfig-paths": "5.0.1",
+    "vitest": "2.0.5"
   },
   "dependencies": {
     "@prisma/client": "5.18.0",
