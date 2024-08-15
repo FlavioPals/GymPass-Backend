@@ -1,9 +1,8 @@
 import { z } from "zod"
 import { FastifyReply, FastifyRequest } from "fastify"
-import { RegisterUseCase } from "../../use-cases/register"
 import { PrismaUsersRepository } from "../../repositories/prisma/prisma-users-repository"
-import { UserAlreadyExistsError } from "../../use-cases/errors/user-already-exists"
 import { AuthenticateUseCase } from "../../use-cases/authenticate"
+import { InvalidCredentialsError } from "../../use-cases/errors/invalid-crendetials-error"
 
 
 export async function authenticate(request: FastifyRequest, reply: FastifyReply) {
@@ -23,11 +22,11 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
         })
     }
     catch(err){
-        if(err instanceof UserAlreadyExistsError){
+        if(err instanceof InvalidCredentialsError){
             return reply.status(409).send({message: err.message})
         }
         throw err
     }
    
-    return reply.status(201).send()
+    return reply.status(200).send()
 }
