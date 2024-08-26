@@ -21,11 +21,19 @@ describe('Get User Metrics Use Case', () => {
             gym_id:'gym-02',
             user_id:'user-01',
         })
+        await checkInsRepository.create({
+            gym_id:'gym-02',
+            user_id:'user-03',
+        })
+        await checkInsRepository.create({
+            gym_id:'gym-02',
+            user_id:'user-01',
+        })
 
         const {checkInsCount} = await sut.execute({
             userId:'user-01',
         })
 
-        expect(checkInsCount).toEqual(2)
+        expect(checkInsCount).toEqual(3)
     })
 })
